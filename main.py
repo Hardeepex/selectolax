@@ -16,8 +16,8 @@ def main():
     chrome_options.add_argument('--start-maximized')  # Example: Start the browser maximized
 
     driver = webdriver.Remote(
-        command_executor=grid_hub_url,
-        options=chrome_options
+        grid_hub_url,
+        chrome_options.to_capabilities()
     )
 
 
@@ -56,7 +56,7 @@ def main():
     baseurl = "https://www.rei.com/c/camping-and-hiking/f/scd-deals?page="
 
     # Create a WebDriver instance that connects to the Selenium Grid hub
-    driver = webdriver.Remote(grid_hub_url, desired_capabilities=webdriver.DesiredCapabilities.CHROME)
+    driver = webdriver.Remote(grid_hub_url, webdriver.DesiredCapabilities.CHROME)
 
     for x in range(1, 100):
         print(f"Gathering page: {x}")
