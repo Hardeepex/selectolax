@@ -15,10 +15,14 @@ def main():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--start-maximized')  # Example: Start the browser maximized
 
-    driver = webdriver.Remote(
-        grid_hub_url,
-        chrome_options.to_capabilities()
-    )
+    if chrome_options is not None:
+        driver = webdriver.Remote(
+            grid_hub_url,
+            chrome_options.to_capabilities()
+        )
+    else:
+        print("Error: chrome_options is None")
+        return
 
 
 def get_html(baseurl, page):
@@ -41,7 +45,6 @@ def extract_text(html, sel):
         return html.css_first(sel).text()
     except AttributeError:
         return None
-
 def parse_page(html):
     products = html.css("li.VcGDfKKy_dvNbxUqm29K")
     for product in products:
