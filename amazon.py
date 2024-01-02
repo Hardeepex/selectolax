@@ -37,8 +37,7 @@ def parse_html(html):
 
 def pagination(html):
     next_page = html.css_first("li.a-last a")
-    if next_page is None:
-        return False
+    return next_page is not None
 
 def load_products():
     with open("products.csv", newline="") as f:
