@@ -31,8 +31,8 @@ def parse_html(html):
     for review in reviews:
         yield Review(
             title=extract(review, "span[data-hook=review-title] span", output="text"),
-            helpful=None,  # Add logic to extract `helpful`
-            body=None  # Add logic to extract `body`
+            helpful=extract(review, "span[data-hook=review-helpful] span", output="text"),  # Add logic to extract `helpful`
+            body=extract(review, "span[data-hook=review-body] span", output="text")  # Add logic to extract `body`
         )
 
 def pagination(html):
