@@ -12,12 +12,12 @@ def main():
     grid_hub_url = "http://localhost:4444/wd/hub"  # Update with your Selenium Grid hub URL
 
     # Define Chrome options with desired capabilities
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--start-maximized')  # Example: Start the browser maximized
+    chrome_options = webdriver.ChromeOptions() if chrome_options is None else chrome_options
+    if chrome_options is not None: chrome_options.add_argument('--start-maximized')  # Example: Start the browser maximized
 
     driver = webdriver.Remote(
         grid_hub_url,
-        chrome_options.to_capabilities()
+        chrome_options.to_capabilities() if chrome_options is not None else None
     )
 
 
