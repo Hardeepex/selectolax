@@ -16,9 +16,13 @@ def main():
         chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--start-maximized')  # Example: Start the browser maximized
 
+    if chrome_options is None:
+        raise AttributeError("'chrome_options' is None, cannot convert to capabilities.")
+    else:
+        desired_capabilities = chrome_options.to_capabilities()
     driver = webdriver.Remote(
-        grid_hub_url,
-        chrome_options.to_capabilities() if chrome_options is not None else raise AttributeError("'chrome_options' is None, cannot convert to capabilities.")
+        command_executor=grid_hub_url,
+        desired_capabilities=desired_capabilities
     )
 
 
